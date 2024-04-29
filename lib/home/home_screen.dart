@@ -4,6 +4,7 @@ import 'package:tree_assignment_3/utils/app_colors.dart';
 import '../widgets/custom_app_widget.dart';
 import '../widgets/custom_geneder_widget.dart';
 import '../widgets/custom_height_widget.dart';
+import '../widgets/custom_result_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int heightForWidget = 80;
   bool maleIconClick = false;
   bool femaleIconClick = false;
+  double resultValue = 0;
+  String bimCategory = "Normal";
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
               isClickedFemale: femaleIconClick,
               uperIconFunction: genderUpperIconFunction,
               lowerIconFunction: genderLowerIconFunction,
+            ),
+            SizedBox(height: height * 0.02),
+            CustomResultWidget(
+              height: height * 0.2,
+              width: width,
+              resultValue: resultValue,
+              bimCategory: bimCategory,
             ),
           ],
         ),
