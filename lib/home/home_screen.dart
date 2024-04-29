@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tree_assignment_3/utils/app_colors.dart';
 
 import '../widgets/custom_app_widget.dart';
+import '../widgets/custom_height_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int age = 0;
   int wieght = 0;
+  int heightForWidget = 80;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 28),
+            SizedBox(height: height * 0.05),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -56,6 +58,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            SizedBox(height: height * 0.02),
+            CustomHieghtWidget(
+              height: height * 0.18,
+              width: width,
+              title: "Hieght (cm)",
+              value: heightForWidget,
+              plusFunction: heightPlusFunction,
+              minusFunction: heightMinusFunction,
+            ),
+            SizedBox(height: height * 0.02),
           ],
         ),
       ),
@@ -88,6 +100,22 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       if (wieght > 0) {
         wieght--;
+      } else {
+        return;
+      }
+    });
+  }
+
+  void heightPlusFunction() {
+    setState(() {
+      heightForWidget++;
+    });
+  }
+
+  void heightMinusFunction() {
+    setState(() {
+      if (heightForWidget > 0) {
+        heightForWidget--;
       } else {
         return;
       }
