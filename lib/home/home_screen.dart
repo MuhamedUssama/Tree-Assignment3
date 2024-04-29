@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tree_assignment_3/utils/app_colors.dart';
 
@@ -29,67 +31,95 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.mainColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              "BMi APP",
-              style: TextStyle(
-                color: AppColors.widgetColor,
-                fontSize: 34,
-                fontWeight: FontWeight.w700,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                "BMi APP",
+                style: TextStyle(
+                  color: AppColors.widgetColor,
+                  fontSize: 34,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            SizedBox(height: height * 0.05),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomFirstRowAppWidget(
-                  height: height * 0.18,
-                  width: width * 0.44,
-                  title: "Age",
-                  value: age,
-                  plusFunction: agePlusFunction,
-                  minusFunction: ageMinusFunction,
+              SizedBox(height: height * 0.05),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomFirstRowAppWidget(
+                    height: height * 0.18,
+                    width: width * 0.44,
+                    title: "Age",
+                    value: age,
+                    plusFunction: agePlusFunction,
+                    minusFunction: ageMinusFunction,
+                  ),
+                  CustomFirstRowAppWidget(
+                    height: height * 0.18,
+                    width: width * 0.44,
+                    title: "Wieght (Kg)",
+                    value: wieght,
+                    plusFunction: wieghtPlusFunction,
+                    minusFunction: wieghtMinusFunction,
+                  ),
+                ],
+              ),
+              SizedBox(height: height * 0.02),
+              CustomHieghtWidget(
+                height: height * 0.18,
+                width: width,
+                title: "Hieght (cm)",
+                value: heightForWidget,
+                plusFunction: heightPlusFunction,
+                minusFunction: heightMinusFunction,
+              ),
+              SizedBox(height: height * 0.02),
+              CustomGenederWidget(
+                height: height * 0.2,
+                width: width,
+                isClickedMale: maleIconClick,
+                isClickedFemale: femaleIconClick,
+                uperIconFunction: genderUpperIconFunction,
+                lowerIconFunction: genderLowerIconFunction,
+              ),
+              SizedBox(height: height * 0.02),
+              CustomResultWidget(
+                height: height * 0.18,
+                width: width,
+                resultValue: resultValue,
+                bimCategory: bimCategory,
+              ),
+              SizedBox(height: height * 0.02),
+              SizedBox(
+                width: width,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: calculateFunction,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color?>(
+                      AppColors.widgetColor,
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Calculate",
+                    style: TextStyle(
+                      color: AppColors.mainColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-                CustomFirstRowAppWidget(
-                  height: height * 0.18,
-                  width: width * 0.44,
-                  title: "Wieght (Kg)",
-                  value: wieght,
-                  plusFunction: wieghtPlusFunction,
-                  minusFunction: wieghtMinusFunction,
-                ),
-              ],
-            ),
-            SizedBox(height: height * 0.02),
-            CustomHieghtWidget(
-              height: height * 0.18,
-              width: width,
-              title: "Hieght (cm)",
-              value: heightForWidget,
-              plusFunction: heightPlusFunction,
-              minusFunction: heightMinusFunction,
-            ),
-            SizedBox(height: height * 0.02),
-            CustomGenederWidget(
-              height: height * 0.2,
-              width: width,
-              isClickedMale: maleIconClick,
-              isClickedFemale: femaleIconClick,
-              uperIconFunction: genderUpperIconFunction,
-              lowerIconFunction: genderLowerIconFunction,
-            ),
-            SizedBox(height: height * 0.02),
-            CustomResultWidget(
-              height: height * 0.2,
-              width: width,
-              resultValue: resultValue,
-              bimCategory: bimCategory,
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -154,6 +184,22 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       maleIconClick = false;
       femaleIconClick = true;
+    });
+  }
+
+  void calculateFunction() {
+    double height = heightForWidget / 100;
+    setState(() {
+      resultValue = wieght / pow(height, 2);
+      if (resultValue <= 18.4) {
+        bimCategory = "Under Weight";
+      } else if (resultValue >= 18.5 && resultValue <= 24.9) {
+        bimCategory = "Normal";
+      } else if (resultValue >= 25 && resultValue <= 39.9) {
+        bimCategory = "Over Weight";
+      } else if (resultValue >= 40) {
+        bimCategory = "Obese";
+      }
     });
   }
 }

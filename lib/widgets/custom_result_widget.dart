@@ -27,37 +27,44 @@ class CustomResultWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            const Text(
-              "Your Result Is: ",
-              style: TextStyle(
-                color: AppColors.mainColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Text(
+                "Your Result Is: ",
+                style: TextStyle(
+                  color: AppColors.mainColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              "$resultValue",
-              style: const TextStyle(
-                color: AppColors.mainColor,
-                fontSize: 64,
-                fontWeight: FontWeight.w900,
+              const SizedBox(height: 8),
+              Text(
+                formatResult(),
+                style: const TextStyle(
+                  color: AppColors.mainColor,
+                  fontSize: 64,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              bimCategory,
-              style: const TextStyle(
-                color: AppColors.mainColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
+              const SizedBox(height: 8),
+              Text(
+                bimCategory,
+                style: const TextStyle(
+                  color: AppColors.mainColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  String formatResult() {
+    String formattedResult = resultValue.toStringAsFixed(2);
+    return formattedResult;
   }
 }
