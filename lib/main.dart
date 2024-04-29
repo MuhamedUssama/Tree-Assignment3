@@ -13,6 +13,7 @@ class BMI extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'BMI App',
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
