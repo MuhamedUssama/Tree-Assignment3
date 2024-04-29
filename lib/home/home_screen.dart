@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tree_assignment_3/utils/app_colors.dart';
 
 import '../widgets/custom_app_widget.dart';
+import '../widgets/custom_geneder_widget.dart';
 import '../widgets/custom_height_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,6 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int age = 0;
   int wieght = 0;
   int heightForWidget = 80;
+  bool maleIconClick = false;
+  bool femaleIconClick = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 CustomFirstRowAppWidget(
                   height: height * 0.18,
-                  width: width * 0.4,
+                  width: width * 0.44,
                   title: "Age",
                   value: age,
                   plusFunction: agePlusFunction,
@@ -50,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CustomFirstRowAppWidget(
                   height: height * 0.18,
-                  width: width * 0.4,
+                  width: width * 0.44,
                   title: "Wieght (Kg)",
                   value: wieght,
                   plusFunction: wieghtPlusFunction,
@@ -68,6 +71,14 @@ class _HomeScreenState extends State<HomeScreen> {
               minusFunction: heightMinusFunction,
             ),
             SizedBox(height: height * 0.02),
+            CustomGenederWidget(
+              height: height * 0.2,
+              width: width,
+              isClickedMale: maleIconClick,
+              isClickedFemale: femaleIconClick,
+              uperIconFunction: genderUpperIconFunction,
+              lowerIconFunction: genderLowerIconFunction,
+            ),
           ],
         ),
       ),
@@ -119,6 +130,20 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         return;
       }
+    });
+  }
+
+  void genderUpperIconFunction() {
+    setState(() {
+      maleIconClick = true;
+      femaleIconClick = false;
+    });
+  }
+
+  void genderLowerIconFunction() {
+    setState(() {
+      maleIconClick = false;
+      femaleIconClick = true;
     });
   }
 }
