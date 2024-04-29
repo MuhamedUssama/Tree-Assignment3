@@ -48,7 +48,7 @@ class CustomHieghtWidget extends StatelessWidget {
                   "$value",
                   style: const TextStyle(
                     color: AppColors.mainColor,
-                    fontSize: 42,
+                    fontSize: 64,
                     fontWeight: FontWeight.w900,
                   ),
                 ),
